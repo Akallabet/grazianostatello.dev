@@ -29,8 +29,12 @@ function Avatar() {
 function Header() {
   return (
     <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-2 ">
-      <Title />
-      <Avatar />
+      <div className="flex justify-center">
+        <Title />
+      </div>
+      <div className="flex justify-center">
+        <Avatar />
+      </div>
     </div>
   );
 }
