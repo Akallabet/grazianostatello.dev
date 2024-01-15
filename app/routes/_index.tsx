@@ -1,6 +1,6 @@
 import { json, type MetaFunction } from "@remix-run/node";
 import avatar from "../images/avatar.jpeg";
-import content from "../i18n/en-GB.json";
+import content from "../i18n/en.json";
 import { useRouteLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
