@@ -1,5 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json, type MetaFunction } from "@remix-run/node";
 import avatar from "../images/avatar.jpeg";
+import content from "../i18n/en-GB.json";
+import { useRouteLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,12 +10,21 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-function Links() {
-  return "";
+export async function loader() {
+  return json(content);
 }
+
+// function Links() {
+//   return "";
+// }
 
 function Title() {
   return <h1>Graziano Statello</h1>;
+}
+
+function Description() {
+  const content = useRouteLoaderData<typeof loader>("routes/_index");
+  return <p>{content?.main.personalDescription}</p>;
 }
 
 function Avatar() {
@@ -29,8 +40,9 @@ function Avatar() {
 function Header() {
   return (
     <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-2 ">
-      <div className="flex justify-center">
+      <div className="justify-center grid">
         <Title />
+        <Description />
       </div>
       <div className="flex justify-center">
         <Avatar />
