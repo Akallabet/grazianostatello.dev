@@ -1,7 +1,10 @@
 import { json, type MetaFunction } from "@remix-run/node";
+import { useRouteLoaderData } from "@remix-run/react";
+
 import avatar from "../images/avatar.jpeg";
 import content from "../i18n/en.json";
-import { useRouteLoaderData } from "@remix-run/react";
+
+import { HomeIcon } from "../components/home-icon";
 
 export const meta: MetaFunction = () => {
   return [
@@ -19,12 +22,14 @@ export async function loader() {
 // }
 
 function Title() {
-  return <h1>Graziano Statello</h1>;
+  return <h1 className="text-4xl font-bold sm:text-5xl">Graziano Statello</h1>;
 }
 
 function Description() {
   const content = useRouteLoaderData<typeof loader>("routes/_index");
-  return <p>{content?.main.personalDescription}</p>;
+  return (
+    <p className="mt-8 mb-12 text-lg">{content?.main.personalDescription}</p>
+  );
 }
 
 function Avatar() {
@@ -37,15 +42,35 @@ function Avatar() {
   );
 }
 
+function HomeLink() {
+  return (
+    <a
+      rel="noopener noreferrer"
+      href="/#"
+      aria-label="Back to homepage"
+      className="flex items-center"
+    >
+      <HomeIcon />
+    </a>
+  );
+}
+
 function Header() {
   return (
-    <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-2 ">
-      <div className="justify-center grid">
-        <Title />
-        <Description />
+    <div>
+      <div className="mb-2">
+        <HomeLink />
       </div>
-      <div className="flex justify-center">
-        <Avatar />
+      <div className="grid md:grid-cols-1 lg:grid-cols-2  gap-2">
+        <div className="sm:justify-center md:justify-center grid mb-4">
+          <Title />
+        </div>
+        <div className="flex justify-center mb-4">
+          <Avatar />
+        </div>
+      </div>
+      <div className="flex sm:justify-center md:justify-center mb-4">
+        <Description />
       </div>
     </div>
   );
@@ -53,8 +78,8 @@ function Header() {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <div className="max-w-screen-2xl mx-auto">
+    <div className="space-y-12 dark:bg-gray-800 dark:text-gray-100">
+      <div className="max-w-screen-2xl mx-auto p-5">
         <Header />
       </div>
     </div>
