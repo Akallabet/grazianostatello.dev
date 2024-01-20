@@ -8,7 +8,10 @@ import {
   Home as HomeIcon,
   Github as GithubIcon,
   Linkedin as LinkedinIcon,
+  Sun as SunIcon,
+  Moon as MoonIcon,
 } from "../components/icons";
+import { useUserPreferences } from "../components/user-preferences/user-preferences";
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,10 +23,6 @@ export const meta: MetaFunction = () => {
 export async function loader() {
   return json(content);
 }
-
-// function Links() {
-//   return "";
-// }
 
 function Title() {
   return <h1 className="text-4xl font-bold sm:text-5xl">Graziano Statello</h1>;
@@ -41,6 +40,23 @@ function Avatar() {
       alt="Graziano Statello"
       className="rounded-full max-w-xs"
     />
+  );
+}
+
+function ThemeSwitcher() {
+  const { colourscheme, toggleColourScheme } = useUserPreferences();
+
+  return (
+    (colourscheme === "light" && (
+      <button type="button" onClick={toggleColourScheme}>
+        <SunIcon />
+      </button>
+    )) ||
+    (colourscheme === "dark" && (
+      <button type="button" onClick={toggleColourScheme}>
+        <MoonIcon />
+      </button>
+    ))
   );
 }
 
@@ -71,6 +87,9 @@ function Links() {
       >
         <LinkedinIcon />
       </a>
+      <div className="ml-4">
+        <ThemeSwitcher />
+      </div>
     </nav>
   );
 }
