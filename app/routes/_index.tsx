@@ -4,7 +4,11 @@ import { useRouteLoaderData } from "@remix-run/react";
 import avatar from "../images/avatar.jpeg";
 import content from "../i18n/en.json";
 
-import { HomeIcon } from "../components/home-icon";
+import {
+  Home as HomeIcon,
+  Github as GithubIcon,
+  Linkedin as LinkedinIcon,
+} from "../components/icons";
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,9 +31,7 @@ function Title() {
 
 function Description() {
   const content = useRouteLoaderData<typeof loader>("routes/_index");
-  return (
-    <p className="mt-8 mb-12 text-lg">{content?.main.personalDescription}</p>
-  );
+  return <p className="text-lg">{content?.main.personalDescription}</p>;
 }
 
 function Avatar() {
@@ -42,46 +44,64 @@ function Avatar() {
   );
 }
 
-function HomeLink() {
+function Links() {
   return (
-    <a
-      rel="noopener noreferrer"
-      href="/#"
-      aria-label="Back to homepage"
-      className="flex items-center"
-    >
-      <HomeIcon />
-    </a>
+    <nav className="flex flex-row">
+      <a
+        rel="noopener noreferrer"
+        href="/#"
+        aria-label="Back to homepage"
+        className="flex items-center"
+      >
+        <HomeIcon />
+      </a>
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://github.com/akallabet"
+        className="ml-4"
+      >
+        <GithubIcon />
+      </a>
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://linkedin.com/in/graziano-statello-88708858/"
+        className="ml-4"
+      >
+        <LinkedinIcon />
+      </a>
+    </nav>
   );
 }
 
 function Header() {
   return (
-    <div>
-      <div className="mb-2">
-        <HomeLink />
-      </div>
-      <div className="grid md:grid-cols-1 lg:grid-cols-2  gap-2">
-        <div className="sm:justify-center md:justify-center grid mb-4">
+    <>
+      <div className="flex items-center flex-col lg:flex-row lg:justify-between mb-16">
+        <div className="mb-16 lg:mb-0">
           <Title />
         </div>
-        <div className="flex justify-center mb-4">
+        <div>
           <Avatar />
         </div>
       </div>
-      <div className="flex sm:justify-center md:justify-center mb-4">
+      <div className="flex items-center flex-col lg:flex-row lg:justify-between">
         <Description />
       </div>
-    </div>
+    </>
   );
 }
 
 export default function Index() {
   return (
-    <div className="space-y-12 dark:bg-gray-800 dark:text-gray-100">
-      <div className="max-w-screen-2xl mx-auto p-5">
+    <>
+      <div className="mb-2 absolute top-10 right-10">
+        <Links />
+      </div>
+      <div className="max-w-screen-lg mx-auto mt-16 px-10 py-16">
         <Header />
       </div>
-    </div>
+    </>
   );
 }
