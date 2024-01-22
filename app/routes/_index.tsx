@@ -94,6 +94,24 @@ function Links() {
   );
 }
 
+function NearformDescription() {
+  const content = useRouteLoaderData<typeof loader>("routes/_index");
+  return (
+    <article className="sm:max-w-full hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-black border p-5 rounded-md">
+      <p>{content.main.nearformDescription}</p>
+      <p>
+        <a
+          href="https://nearform.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          About it.
+        </a>
+      </p>
+    </article>
+  );
+}
+
 function Header() {
   return (
     <>
@@ -101,12 +119,11 @@ function Header() {
         <div className="mb-16 lg:mb-0">
           <Title />
         </div>
-        <div>
-          <Avatar />
-        </div>
+        <Avatar />
       </div>
       <div className="flex items-center flex-col lg:flex-row lg:justify-between">
         <Description />
+        <NearformDescription />
       </div>
     </>
   );

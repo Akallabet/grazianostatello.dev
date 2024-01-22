@@ -28,10 +28,12 @@ function Main() {
         <Links />
       </head>
       <body className="dark:bg-gray-800 dark:text-gray-100">
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <main>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </main>
       </body>
     </html>
   );
