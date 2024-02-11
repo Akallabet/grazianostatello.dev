@@ -2,7 +2,8 @@ import { json, type MetaFunction } from "@remix-run/node";
 import { useRouteLoaderData } from "@remix-run/react";
 
 import avatar from "../images/avatar.jpeg";
-import content from "../i18n/en.json";
+import content from "../i18n/en/copy.json";
+import jobs from "../i18n/en/jobs.json";
 
 import {
   Home as HomeIcon,
@@ -21,7 +22,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader() {
-  return json(content);
+  return json({ content, jobs });
 }
 
 function Title() {
@@ -29,7 +30,7 @@ function Title() {
 }
 
 function Description() {
-  const content = useRouteLoaderData<typeof loader>("routes/_index");
+  const { content } = useRouteLoaderData<typeof loader>("routes/_index");
   return <p className="text-lg">{content?.main.personalDescription}</p>;
 }
 
@@ -95,7 +96,7 @@ function Links() {
 }
 
 function NearformDescription() {
-  const content = useRouteLoaderData<typeof loader>("routes/_index");
+  const { content } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
     <article className="sm:max-w-lg hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-gray-300 border p-5 rounded-md">
       <p>{content.main.nearformDescription}</p>
@@ -132,6 +133,73 @@ function Header() {
   );
 }
 
+interface Company {
+  name: string;
+  url?: string;
+}
+
+interface Job {
+  id: string;
+  position: string;
+  company: Company;
+  period: {
+    from: string;
+    to?: string;
+  };
+  description: string;
+}
+
+interface TimelineProps {
+  jobs: Array<Job>;
+}
+
+function Company({ name, url }: Company) {
+  return url ? (
+    <a href={url} rel="noopener noreferrer" target="_blank">
+      {name}
+    </a>
+  ) : (
+    <>{name}</>
+  );
+}
+
+function Timeline({ jobs }: TimelineProps) {
+  const {
+    content: { experience },
+  } = useRouteLoaderData<typeof loader>("routes/_index");
+  return (
+    <section className="">
+      <div className="container max-w-5xl px-4 py-12 mx-auto">
+        <div className="grid gap-4 mx-4 sm:grid-cols-12">
+          <div className="col-span-12 sm:col-span-3">
+            <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600">
+              <h3 className="text-3xl font-semibold">{experience.title}</h3>
+            </div>
+          </div>
+          <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
+            <div className="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
+              {jobs.map((job) => (
+                <div
+                  key={job.id}
+                  className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-blue-600"
+                >
+                  <h3 className="text-xl font-semibold tracki">
+                    {job.position} at <Company {...job.company} />
+                  </h3>
+                  <time className="text-xs tracki uppercase text-gray-600">
+                    {job.period.from} - {job.period.to || experience.current}
+                  </time>
+                  <p className="mt-3">{job.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Index() {
   return (
     <>
@@ -140,6 +208,9 @@ export default function Index() {
       </div>
       <div className="max-w-screen-lg mx-auto mt-16 px-10 py-16">
         <Header />
+      </div>
+      <div className="max-w-screen-lg mx-auto mt-16 px-10">
+        <Timeline jobs={jobs} />
       </div>
     </>
   );

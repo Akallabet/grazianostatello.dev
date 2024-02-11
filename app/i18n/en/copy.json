@@ -2,5 +2,9 @@
   "main": {
     "personalDescription": "Senior software engineer at Nearform.",
     "nearformDescription": "Nearform creates software solutions that accelerate enterprise success, enrich customer experience and contribute to the development of our community."
+  },
+  "experience": {
+    "title": "Experience",
+    "current": "present"
   }
 }
