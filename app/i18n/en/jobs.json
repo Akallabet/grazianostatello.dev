@@ -9,11 +9,15 @@
     "period": {
       "from": "Mar 2023"
     },
+    "location": {
+      "city": "Remote",
+      "country": "Italy"
+    },
     "description": "I work on a variety of projects, from full stack web applications to serverless microservices. I have a particular interest in the JavaScript ecosystem, and I am a strong advocate for open source software."
   },
   {
     "id": "signalai",
-    "position": "Senior Software Engineer",
+    "position": "Senior Web Engineer",
     "company": {
       "name": "SignalAI",
       "url": "https://www.signal-ai.com"
@@ -22,6 +26,44 @@
       "from": "Aug 2021",
       "to": "Mar 2023"
     },
-    "description": "I work on a variety of projects, from full stack web applications to serverless microservices. I have a particular interest in the JavaScript ecosystem, and I am a strong advocate for open source software."
+    "location": {
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    "description": "Developing pipelines across the full stack (FrontEnd, BackEnd, Database and Infrastructure) to optimise the delivery of advanced insights created from the consumption of millions of documents a day using Machine Learning and NLP."
+  },
+  {
+    "id": "and-digital-principal",
+    "position": "Front End Technology Principal",
+    "company": {
+      "name": "AND Digital",
+      "url": "https://www.and.digital/"
+    },
+    "period": {
+      "from": "Jan 2018",
+      "to": "Aug 2021"
+    },
+    "location": {
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    "description": "My main achievement in this role was leading a fully remote team in building an ambitious mobile-first website for ordering and paying at table for Zizzi and Ask Italian. The result was a sound success and we had the highest adoption rate of any other similar product in the UK. We used GatsbyJs on a bespoke microservices AWS architecture and real time communication with the use of web-sockets, to guarantee the best possible experience in any mobile device."
+  },
+  {
+    "id": "and-digital-developer",
+    "position": "SEnior Product Developer",
+    "company": {
+      "name": "AND Digital",
+      "url": "https://www.and.digital/"
+    },
+    "period": {
+      "from": "Oct 2017",
+      "to": "Jan 2020"
+    },
+    "location": {
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    "description": "In AND Digital I helped building multiple products in a variety of industries.\n - Lead the migration of [Premier Inn Business](https://www.premierinn.com/gb/en/business.html)\n- Lead a small team in the creation of [Restoration & Renewal Programme](https://restorationandrenewal.uk) using Contentful as CMS and React.\n- Helped the update of multiple features for Lloyds mobile App using React Native.In AND Digital I helped building multiple products in a variety of industries.\n- Lead the migration of [Premier Inn Business](https://www.premierinn.com/gb/en/business.html)\n- Lead a small team in the creation of Restoration & Renewal Programme https://restorationandrenewal.uk using Contentful as CMS and React.\n- Helped the update of multiple features for Lloyds mobile App using React Native."
   }
 ]

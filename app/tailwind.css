@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.job-description {
+	a {
+		text-decoration: underline;
+	}
+
+	ul {
+		list-style-type: disc;
+		list-style-position: inside;
+	}
+}

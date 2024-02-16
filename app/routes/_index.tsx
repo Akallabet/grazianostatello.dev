@@ -13,6 +13,8 @@ import {
   Moon as MoonIcon,
 } from "../components/icons";
 import { useUserPreferences } from "../components/user-preferences/user-preferences";
+import { useMemo } from "react";
+import { micromark } from "micromark";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,7 +23,28 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+async function getContent() {
+  // const request = await fetch(
+  //   "https://raw.githubusercontent.com/Akallabet/grazianostatello.dev/main/app/i18n/en/copy.json"
+  // );
+  // return request.json();
+  return content;
+}
+
+async function getJobs() {
+  // const request = await fetch(
+  //   "https://raw.githubusercontent.com/Akallabet/grazianostatello.dev/main/app/i18n/en/jobs.json"
+  // );
+  // return request.json();
+  return jobs;
+}
+
 export async function loader() {
+  const content = await getContent();
+  const jobs = await getJobs();
+
+  console.log(content, jobs);
+
   return json({ content, jobs });
 }
 
@@ -155,11 +178,43 @@ interface TimelineProps {
 
 function Company({ name, url }: Company) {
   return url ? (
-    <a href={url} rel="noopener noreferrer" target="_blank">
+    <a
+      href={url}
+      rel="noopener noreferrer"
+      target="_blank"
+      className="underline"
+    >
       {name}
     </a>
   ) : (
     <>{name}</>
+  );
+}
+
+function Job({ job }: { job: Job }) {
+  const {
+    content: { experience },
+  } = useRouteLoaderData<typeof loader>("routes/_index");
+  const description = useMemo(() => {
+    return micromark(job.description);
+  }, [job.description]);
+
+  return (
+    <div
+      key={job.id}
+      className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-blue-600"
+    >
+      <h3 className="text-xl font-semibold tracki">
+        {job.position} at <Company {...job.company} />
+      </h3>
+      <time className="text-xs tracki uppercase text-gray-500">
+        {job.period.from} - {job.period.to || experience.current}
+      </time>
+      <article
+        className="mt-3 text-justify job-description"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+    </div>
   );
 }
 
@@ -169,28 +224,17 @@ function Timeline({ jobs }: TimelineProps) {
   } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
     <section className="">
-      <div className="container max-w-5xl px-4 py-12 mx-auto">
-        <div className="grid gap-4 mx-4 sm:grid-cols-12">
+      <div className="container max-w-5xl py-12 mx-auto">
+        <div className="grid gap-4 sm:grid-cols-12">
           <div className="col-span-12 sm:col-span-3">
             <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600">
               <h3 className="text-3xl font-semibold">{experience.title}</h3>
             </div>
           </div>
-          <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
-            <div className="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
+          <div className="relative col-span-12 pl-4 space-y-6 sm:col-span-9">
+            <div className="col-span-12 space-y-12 relative pl-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
               {jobs.map((job) => (
-                <div
-                  key={job.id}
-                  className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-blue-600"
-                >
-                  <h3 className="text-xl font-semibold tracki">
-                    {job.position} at <Company {...job.company} />
-                  </h3>
-                  <time className="text-xs tracki uppercase text-gray-600">
-                    {job.period.from} - {job.period.to || experience.current}
-                  </time>
-                  <p className="mt-3">{job.description}</p>
-                </div>
+                <Job key={job.id} job={job} />
               ))}
             </div>
           </div>
@@ -201,6 +245,7 @@ function Timeline({ jobs }: TimelineProps) {
 }
 
 export default function Index() {
+  const { jobs } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
     <>
       <div className="mb-2 absolute top-10 right-10">
