@@ -51,7 +51,7 @@
   },
   {
     "id": "and-digital-developer",
-    "position": "SEnior Product Developer",
+    "position": "Senior Product Developer",
     "company": {
       "name": "AND Digital",
       "url": "https://www.and.digital/"
@@ -65,5 +65,56 @@
       "country": "United Kingdom"
     },
     "description": "In AND Digital I helped building multiple products in a variety of industries.\n - Lead the migration of [Premier Inn Business](https://www.premierinn.com/gb/en/business.html)\n- Lead a small team in the creation of [Restoration & Renewal Programme](https://restorationandrenewal.uk) using Contentful as CMS and React.\n- Helped the update of multiple features for Lloyds mobile App using React Native.In AND Digital I helped building multiple products in a variety of industries.\n- Lead the migration of [Premier Inn Business](https://www.premierinn.com/gb/en/business.html)\n- Lead a small team in the creation of Restoration & Renewal Programme https://restorationandrenewal.uk using Contentful as CMS and React.\n- Helped the update of multiple features for Lloyds mobile App using React Native."
+  },
+  {
+    "id": "icap",
+    "position": "Senior Application Developer",
+    "company": {
+      "name": "ICAP",
+      "url": "https://tpicap.com/icap/"
+    },
+    "period": {
+      "from": "Mar 2016",
+      "to": "Aug 2017"
+    },
+    "location": {
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    "description": "I was part of multiple teams that built a real time trading platform used by brokers to arbitrate buying and selling of various financial products.\nMy team was responsible for the web platform which we built using microFrontends in React and Redux, we used D3 to create custom charts. We used CI/CD with multiple daily releases and whilst monitoring performance, quality and security."
+  },
+  {
+    "id": "vml",
+    "position": "Web Developer",
+    "company": {
+      "name": "VML",
+      "url": "https://www.vml.com/"
+    },
+    "period": {
+      "from": "Apr 2014",
+      "to": "Feb 2016"
+    },
+    "location": {
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    "description": "I was involved in the modernisation and revamping of [PremierInn](http://www.premierinn.com) using Adobe Experience Manager and AngularJs, improving SEO visibility, first time loading speed and allowing multi language customisation for german market.\nWe ran Continuous Integration with multiple daily releases, canary releases and traffic monitoring"
+  },
+  {
+    "id": "oto",
+    "position": "Front End Developer",
+    "company": {
+      "name": "OTO Travel Technology",
+      "url": "https://www.otosrl.com/"
+    },
+    "period": {
+      "from": "Feb 2012",
+      "to": "Apr 2014"
+    },
+    "location": {
+      "city": "Catania",
+      "country": "Italia"
+    },
+    "description": "Worked as a web developer for a small and dynamic startup that has distrupted the travel & tourism industry in Italy. I've been responsible for the creation and maintenance of a highly flexible whitelable used in a variety of travel agencies websites."
   }
 ]

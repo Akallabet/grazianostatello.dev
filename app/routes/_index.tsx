@@ -24,26 +24,16 @@ export const meta: MetaFunction = () => {
 };
 
 async function getContent() {
-  // const request = await fetch(
-  //   "https://raw.githubusercontent.com/Akallabet/grazianostatello.dev/main/app/i18n/en/copy.json"
-  // );
-  // return request.json();
   return content;
 }
 
 async function getJobs() {
-  // const request = await fetch(
-  //   "https://raw.githubusercontent.com/Akallabet/grazianostatello.dev/main/app/i18n/en/jobs.json"
-  // );
-  // return request.json();
   return jobs;
 }
 
 export async function loader() {
   const content = await getContent();
   const jobs = await getJobs();
-
-  console.log(content, jobs);
 
   return json({ content, jobs });
 }
@@ -54,7 +44,16 @@ function Title() {
 
 function Description() {
   const { content } = useRouteLoaderData<typeof loader>("routes/_index");
-  return <p className="text-lg">{content?.main.personalDescription}</p>;
+  const mdDescription = useMemo(() => {
+    return micromark(content.main.personalDescription);
+  }, [content]);
+
+  return (
+    <p
+      className="text-2xl"
+      dangerouslySetInnerHTML={{ __html: mdDescription }}
+    />
+  );
 }
 
 function Avatar() {
@@ -120,19 +119,15 @@ function Links() {
 
 function NearformDescription() {
   const { content } = useRouteLoaderData<typeof loader>("routes/_index");
+  const mdDescription = useMemo(() => {
+    return micromark(content.main.nearformDescription);
+  }, [content]);
   return (
-    <article className="sm:max-w-lg hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-gray-300 border p-5 rounded-md">
-      <p>{content.main.nearformDescription}</p>
-      <p>
-        <a
-          href="https://nearform.com"
-          rel="noopener noreferrer"
-          target="_blank"
-          className="underline"
-        >
-          About it.
-        </a>
-      </p>
+    <article className="nf-description sm:max-w-2xl hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-gray-300 border p-5 rounded-md">
+      <p
+        className="text-xl"
+        dangerouslySetInnerHTML={{ __html: mdDescription }}
+      />
     </article>
   );
 }
@@ -140,10 +135,10 @@ function NearformDescription() {
 function Header() {
   return (
     <>
-      <div className="flex justify-center mb-16 lg:mb-16">
+      <div className="flex justify-center mb-20">
         <Title />
       </div>
-      <div className="flex justify-center mb-16 lg:mb-16">
+      <div className="flex justify-center mb-20">
         <Avatar />
       </div>
       <div className="flex items-center flex-col lg:flex-row lg:justify-between">
@@ -202,7 +197,7 @@ function Job({ job }: { job: Job }) {
   return (
     <div
       key={job.id}
-      className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-blue-600"
+      className="flex flex-col md:relative md:before:absolute md:before:top-2 md:before:w-4 md:before:h-4 md:before:rounded-full md:before:left-[-35px] md:before:z-[1] before:bg-blue-600"
     >
       <h3 className="text-xl font-semibold tracki">
         {job.position} at <Company {...job.company} />
@@ -223,20 +218,18 @@ function Timeline({ jobs }: TimelineProps) {
     content: { experience },
   } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
-    <section className="">
-      <div className="container max-w-5xl py-12 mx-auto">
-        <div className="grid gap-4 sm:grid-cols-12">
-          <div className="col-span-12 sm:col-span-3">
-            <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-blue-600">
-              <h3 className="text-3xl font-semibold">{experience.title}</h3>
-            </div>
+    <section className="py-12 mx-auto">
+      <div className="grid gap-4 sm:grid-cols-12">
+        <div className="col-span-12 md:col-span-3">
+          <div className="text-center md:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto md:before:mx-0 before:bg-blue-600">
+            <h3 className="text-3xl font-semibold">{experience.title}</h3>
           </div>
-          <div className="relative col-span-12 pl-4 space-y-6 sm:col-span-9">
-            <div className="col-span-12 space-y-12 relative pl-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
-              {jobs.map((job) => (
-                <Job key={job.id} job={job} />
-              ))}
-            </div>
+        </div>
+        <div className="relative col-span-12 md:pl-4 space-y-6 md:col-span-9">
+          <div className="col-span-12 space-y-12 relative md:pl-4 md:col-span-8 md:space-y-8 md:before:absolute md:before:top-2 md:before:bottom-0 md:before:w-0.5 md:before:-left-3 before:bg-gray-300">
+            {jobs.map((job) => (
+              <Job key={job.id} job={job} />
+            ))}
           </div>
         </div>
       </div>
@@ -251,11 +244,13 @@ export default function Index() {
       <div className="mb-2 absolute top-10 right-10">
         <Links />
       </div>
-      <div className="max-w-screen-lg mx-auto mt-16 px-10 py-16">
-        <Header />
-      </div>
-      <div className="max-w-screen-lg mx-auto mt-16 px-10">
-        <Timeline jobs={jobs} />
+      <div className="max-w-screen-2xl mx-auto mt-16 px-10 py-16">
+        <div className="mb-16">
+          <Header />
+        </div>
+        <div>
+          <Timeline jobs={jobs} />
+        </div>
       </div>
     </>
   );

@@ -14,7 +14,10 @@ import {
   useUserPreferences,
 } from "./components/user-preferences/user-preferences";
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
+  { rel: "icon", type: "image/png", href: "/favicon.png" },
+];
 
 function Main() {
   const { colourscheme } = useUserPreferences();

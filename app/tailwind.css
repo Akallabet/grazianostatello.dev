@@ -12,3 +12,9 @@
 		list-style-position: inside;
 	}
 }
+
+.nf-description {
+	a {
+		text-decoration: underline;
+	}
+}
