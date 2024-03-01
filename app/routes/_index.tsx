@@ -135,13 +135,13 @@ function NearformDescription() {
 function Header() {
   return (
     <>
-      <div className="flex justify-center mb-20">
+      <div className="flex justify-center mb-24">
         <Title />
       </div>
-      <div className="flex justify-center mb-20">
+      <div className="flex justify-center mb-24">
         <Avatar />
       </div>
-      <div className="flex items-center flex-col lg:flex-row lg:justify-between">
+      <div className="flex items-start flex-col lg:flex-row lg:justify-between">
         <div className="mb-16 lg:mb-0">
           <Description />
         </div>
