@@ -42,20 +42,6 @@ function Title() {
   return <h1 className="text-4xl font-bold sm:text-5xl">Graziano Statello</h1>;
 }
 
-function Description() {
-  const { content } = useRouteLoaderData<typeof loader>("routes/_index");
-  const mdDescription = useMemo(() => {
-    return micromark(content.main.personalDescription);
-  }, [content]);
-
-  return (
-    <p
-      className="text-2xl"
-      dangerouslySetInnerHTML={{ __html: mdDescription }}
-    />
-  );
-}
-
 function Avatar() {
   return (
     <img
@@ -117,18 +103,30 @@ function Links() {
   );
 }
 
+function Description() {
+  const { content } = useRouteLoaderData<typeof loader>("routes/_index");
+  const mdDescription = useMemo(() => {
+    return micromark(content.main.personalDescription);
+  }, [content]);
+
+  return (
+    <article
+      className="text-2xl text-center lg:text-left"
+      dangerouslySetInnerHTML={{ __html: mdDescription }}
+    />
+  );
+}
+
 function NearformDescription() {
   const { content } = useRouteLoaderData<typeof loader>("routes/_index");
   const mdDescription = useMemo(() => {
     return micromark(content.main.nearformDescription);
   }, [content]);
   return (
-    <article className="nf-description sm:max-w-2xl hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-gray-300 border p-5 rounded-md">
-      <p
-        className="text-xl"
-        dangerouslySetInnerHTML={{ __html: mdDescription }}
-      />
-    </article>
+    <article
+      className="nf-description sm:max-w-2xl hover:no-underline focus:no-underline bg-white dark:bg-gray-900 border-gray-300 border p-5 rounded-md mx-auto text-xl"
+      dangerouslySetInnerHTML={{ __html: mdDescription }}
+    />
   );
 }
 
@@ -141,8 +139,8 @@ function Header() {
       <div className="flex justify-center mb-24">
         <Avatar />
       </div>
-      <div className="flex items-start flex-col lg:flex-row lg:justify-between">
-        <div className="mb-16 lg:mb-0">
+      <div className="lg:flex lg:items-start lg:flex-row lg:justify-between">
+        <div className="mb-16 lg:mb-0 w-full ">
           <Description />
         </div>
         <NearformDescription />
