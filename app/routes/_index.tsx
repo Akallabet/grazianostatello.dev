@@ -1,5 +1,5 @@
 import { json, type MetaFunction } from "@remix-run/node";
-import { useRouteLoaderData } from "@remix-run/react";
+import { Link, useRouteLoaderData } from "@remix-run/react";
 
 import avatar from "../images/avatar.jpeg";
 import content from "../i18n/en/copy.json";
@@ -11,6 +11,7 @@ import {
   Linkedin as LinkedinIcon,
   Sun as SunIcon,
   Moon as MoonIcon,
+  Experience as ExperienceIcon,
 } from "../components/icons";
 import { useUserPreferences } from "../components/user-preferences/user-preferences";
 import { useMemo } from "react";
@@ -79,6 +80,14 @@ function Links() {
         className="flex items-center"
       >
         <HomeIcon />
+      </a>
+      <a
+        rel="noopener noreferrer"
+        href="/#experience"
+        aria-label="experience"
+        className="flex items-center"
+      >
+        <ExperienceIcon />
       </a>
       <a
         rel="noopener noreferrer"
@@ -216,11 +225,13 @@ function Timeline({ jobs }: TimelineProps) {
     content: { experience },
   } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
-    <section className="py-12 mx-auto">
+    <section id="experience" className="py-12 mx-auto">
       <div className="grid gap-4 sm:grid-cols-12">
         <div className="col-span-12 md:col-span-3">
           <div className="text-center md:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto md:before:mx-0 before:bg-blue-600">
-            <h3 className="text-3xl font-semibold">{experience.title}</h3>
+            <h3 className="text-3xl font-semibold hover:underline">
+              <Link to="#experience">{experience.title}</Link>
+            </h3>
           </div>
         </div>
         <div className="relative col-span-12 md:pl-4 space-y-6 md:col-span-9">
