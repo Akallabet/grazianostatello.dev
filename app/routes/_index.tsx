@@ -11,7 +11,6 @@ import {
   Linkedin as LinkedinIcon,
   Sun as SunIcon,
   Moon as MoonIcon,
-  Experience as ExperienceIcon,
 } from "../components/icons";
 import { useUserPreferences } from "../components/user-preferences/user-preferences";
 import { useMemo } from "react";
@@ -80,14 +79,6 @@ function Links() {
         className="flex items-center"
       >
         <HomeIcon />
-      </a>
-      <a
-        rel="noopener noreferrer"
-        href="/#experience"
-        aria-label="experience"
-        className="flex items-center"
-      >
-        <ExperienceIcon />
       </a>
       <a
         rel="noopener noreferrer"
@@ -250,9 +241,18 @@ export default function Index() {
   const { jobs } = useRouteLoaderData<typeof loader>("routes/_index");
   return (
     <>
-      <div className="mb-2 absolute top-10 right-10">
+      <header className="max-w-screen-xl mx-auto flex flex-col items-center md:flex-row md:justify-between mb-2 p-10">
+        <div className="mb-5">
+          <a href="/#" className="text-md hover:text-blue-400">
+            grazianostatello.dev
+          </a>
+          <span className="mx-2">|</span>
+          <a href="/#experience" className="hover:text-blue-400">
+            About me
+          </a>
+        </div>
         <Links />
-      </div>
+      </header>
       <div className="max-w-screen-2xl mx-auto mt-16 px-10 py-16">
         <div className="mb-16">
           <Header />
